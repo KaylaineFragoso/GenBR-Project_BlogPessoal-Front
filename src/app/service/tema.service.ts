@@ -1,7 +1,7 @@
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { observable, Observable } from 'rxjs';
 import { Tema } from '../model/Tema';
 
 @Injectable({
@@ -19,8 +19,24 @@ export class TemaService {
     return this.http.get<Tema[]>('https://localhost:8080/temas', this.token)
   }
 
+  getByIdTema(id: number): Observable<Tema> {
+    return this. http.get<Tema>('{http: //localhost:8080/tema${id}', this.token)
+  }
+
   postTema(tema: Tema): Observable<Tema> {
     return this.http.post<Tema>('https://localhost:8080/temas', tema, this.token)
   }
+
+  putTema(tema : Tema): Observable<Tema> {
+    return this.http.put<Tema>("http:localhost:8080/temas", tema, this.token)
+  }
+
+  deleteTema(id: number) {
+    return this.http.delete(`http:localhost:8080/temas/${id}`, this.token)
+  }
+
+
+
+
 }
 
